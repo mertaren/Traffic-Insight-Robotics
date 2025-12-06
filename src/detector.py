@@ -7,15 +7,26 @@ class VechileDetector:
         print("model loading..")
         self.model = YOLO(model_path)
 
-        # Taget classes  (COCO database)
+        # Target classes  (COCO database)
         # 2: car , 3: motorcycle, 5: bus, 7: truck       
         self.target_classes = [2, 3, 5, 7] 
 
     def detect(self, frame):
         """
-        Docstring for detect
         Input: Frame
         Output: Bounding box list
         """
-        pass
+        results = self.model(frame, verbose=False)[0]
+        detections = []
+
+        for box in results.boxes:
+            class_id = int(box.cls[0])
+            conf = float(box.conf[0]) # our score
+
+            if class_id in self.target_classes and conf > 0.5:
+                x1, y1, x2, y2 = map(int, box.xyxy[0]) # convert cords to int
+                detections.append([x1, y1 ,x2, y2, conf, class_id])
+        
+        return np.array(detections)
+
 
