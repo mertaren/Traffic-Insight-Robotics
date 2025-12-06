@@ -22,6 +22,7 @@ The initial phase involved only detecting objects in each frame independently, w
 Instead of using an off-the-shelf tracker, I implemented a custom **Centroid Tracking Algorithm**. This algorithm converts bounding box coordinates into a center point (cx, cy) for each object.
 
 **Centroid Calculation Formula:**
+
 $$
 C_x = \frac{x_1 + x_2}{2}, \quad C_y = \frac{y_1 + y_2}{2}
 $$
@@ -31,8 +32,9 @@ To associate detections between consecutive frames, the system calculates the
 **Euclidean Distance** between existing object centers and new detections.
 
 **Euclidean Distance Formula:**
+
 $$
-Distance = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+\text{Distance} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
 $$
 
 If the distance is below a specific threshold, the algorithm associates the new detection with the existing ID.
