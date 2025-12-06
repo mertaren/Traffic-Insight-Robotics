@@ -16,16 +16,20 @@ class VehicleDetector:
         Input: Frame
         Output: Bounding box list
         """
-        results = self.model(frame, verbose=False)[0]
+        results = self.model(frame, verbose=False,
+                             imgsz=1280, conf=0.35,
+                             classes = self.target_classes)[0]
         detections = []
 
         for box in results.boxes:
             class_id = int(box.cls[0])
-            conf = float(box.conf[0]) # our score
+            confidence = float(box.conf[0]) # our score
 
-            if class_id in self.target_classes and conf > 0.35:
-                x1, y1, x2, y2 = map(int, box.xyxy[0]) # convert cords to int
-                detections.append([x1, y1 ,x2, y2, conf, class_id])
+            x1, y1, x2 ,y2 = map(int, box.xyxy[0])
+            w = x2 - x1
+            h = y2 - y1
+
+            detections.append([x1, y1, w, h, confidence, class_id])
         
         return np.array(detections)
 
