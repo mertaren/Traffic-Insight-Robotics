@@ -2,7 +2,7 @@ from ultralytics import YOLO
 import cv2
 import numpy as np
 
-class VechileDetector:
+class VehicleDetector:
     def __init__(self, model_path="yolov8n.pt"):
         print("model loading..")
         self.model = YOLO(model_path)
@@ -23,7 +23,7 @@ class VechileDetector:
             class_id = int(box.cls[0])
             conf = float(box.conf[0]) # our score
 
-            if class_id in self.target_classes and conf > 0.5:
+            if class_id in self.target_classes and conf > 0.35:
                 x1, y1, x2, y2 = map(int, box.xyxy[0]) # convert cords to int
                 detections.append([x1, y1 ,x2, y2, conf, class_id])
         
