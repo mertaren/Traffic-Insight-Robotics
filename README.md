@@ -23,7 +23,7 @@ Instead of using an off-the-shelf tracker, I implemented a custom **Centroid Tra
 
 **Centroid Calculation Formula:**
 <div align="center">
-  <img src="[https://latex.codecogs.com/svg.latex](https://latex.codecogs.com/svg.latex)?\Large&space;C_x=\frac{x_1+x_2}{2},\quad C_y=\frac{y_1+y_2}{2}" title="Centroid Calculation" />
+  <img src="https://latex.codecogs.com/svg.latex?\Large&space;C_x=\frac{x_1+x_2}{2},\quad C_y=\frac{y_1+y_2}{2}" title="Centroid Calculation" />
 </div>
 <br>
 
@@ -31,7 +31,7 @@ To associate detections between consecutive frames, the system calculates the **
 
 **Euclidean Distance Formula:**
 <div align="center">
-  <img src="[https://latex.codecogs.com/svg.latex](https://latex.codecogs.com/svg.latex)?\Large&space;Distance=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}" title="Euclidean Distance" />
+  <img src="https://latex.codecogs.com/svg.latex?\Large&space;Distance=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}" title="Euclidean Distance" />
 </div>
 <br>
 
