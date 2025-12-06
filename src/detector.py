@@ -17,7 +17,7 @@ class VehicleDetector:
         Output: Bounding box list
         """
         results = self.model(frame, verbose=False,
-                             imgsz=1280, conf=0.35,
+                             imgsz=1280, conf=0.30,
                              classes = self.target_classes)[0]
         detections = []
 

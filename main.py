@@ -30,6 +30,16 @@ def main():
         for det in detections:
             x, y, w, h, conf, class_id = det
             
+            area = w * h # area of the box
+            min_area_th = 1500
+
+            if area < min_area_th and class_id != 3:
+                continue
+            
+            # ROI filter for false tracking
+            if (630 < x < 840) and (200 < y < 420):
+                continue
+
             boxes_for_tracker.append([x, y, w ,h])
 
         # call tracker function
@@ -42,7 +52,7 @@ def main():
                         (int(x + w), int(y + h)),
                         (0, 255 ,0), 2)
             
-            cv2.putText(frame, f"{id}", (int(x), int(y) - 15),
+            cv2.putText(frame, f"ID: {id}", (int(x), int(y) - 15),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 255) ,2)
             
         
