@@ -3,13 +3,13 @@ import cv2
 import numpy as np
 
 class VehicleDetector:
-    def __init__(self, model_path="yolov8n.pt"):
+    def __init__(self, model_path="yolov8m"):
         print("model loading..")
         self.model = YOLO(model_path)
 
-        # Target classes  (COCO database)
-        # 2: car , 3: motorcycle, 5: bus, 7: truck       
-        self.target_classes = [2, 3, 5, 7] 
+        # Target classes  (VisDrone database)
+        # 3: car, 4: van, 5: truck, 6: tricycle, 9: bus      
+        self.target_classes = [3, 4, 5, 6, 9] 
 
     def detect(self, frame):
         """
@@ -17,7 +17,7 @@ class VehicleDetector:
         Output: Bounding box list
         """
         results = self.model(frame, verbose=False,
-                             imgsz=1280, conf=0.30,
+                             imgsz=640, conf=0.45,
                              classes = self.target_classes)[0]
         detections = []
 
