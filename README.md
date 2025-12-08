@@ -64,16 +64,47 @@ if area < min_area_th and class_id != 3:
 if (630 < x < 840) and (200 < y < 420):
     continue
 ```
-**Final Result: Tracking with Occlusion Handling & Filtering**
+**Tracking with Occlusion Handling & Filtering**
 
-![Final Tracking Demo](assets/demo_2.gif)
+![Tracking Demo](assets/demo_2.gif)
 
 *(Fig 2: Current system performance demonstrating stable ID assignment even under occlusions.)*
 
+## Kalman Filter Implementation
+
+To handle detection noise and temporary occlusions, a Linear Kalman Filter is implemented with a Constant Velocity Model.
+
+### State Vector
+The state of each vehicle is represented by its position ($x, y$) and velocity ($v_x, v_y$):
+
+$$
+\mathbf{x} = \begin{bmatrix} x & y & v_x & v_y \end{bmatrix}^T
+$$
+
+### Motion Model
+The state transition is based on the following kinematic equation, allowing the system to predict the vehicle's position even when detection fails:
+
+$$
+\mathbf{x}_{k} = \mathbf{F} \cdot \mathbf{x}_{k-1} \quad \Rightarrow \quad 
+\begin{bmatrix} x' \\ y' \\ v_x' \\ v_y' \end{bmatrix} = 
+\begin{bmatrix} 
+1 & 0 & \Delta t & 0 \\ 
+0 & 1 & 0 & \Delta t \\ 
+0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 
+\end{bmatrix} 
+\begin{bmatrix} x \\ y \\ v_x \\ v_y \end{bmatrix}
+$$
+
+## Kalman Filter Phase
+
+![Tracking Demo](assets/demo_3.gif)
+
+*(Fig 3. Kalman Filter State Estimation)*
+
 ## Future Improvements
-The current version establishes robust tracking. The next phase of development will focus on **State Estimation** to integrate physics-based prediction:
-* Implementation of a **Kalman Filter** to predict future states (x, y positions and velocity).
-* Real-time speed estimation (km/h) using perspective transformation.
+
+* **Data Association:** Currently, the tracker uses a Nearest Neighbor approach. To solve ID switching during occlusions, the Hungarian Algorithm will be integrated for global cost optimization.
+* **Model Optimization:** The detection model has been updated to use VisDrone weights to improve accuracy on top-down aerial views.
 
 ## 5. References & Credits
 The traffic footage used in this project was sourced from YouTube for educational and testing purposes.
