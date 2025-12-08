@@ -82,22 +82,28 @@ $$
 $$
 
 ### Motion Model
-The state transition is based on the following kinematic equation, allowing the system to predict the vehicle's position even when detection fails:
+The state transition is based on the **Constant Velocity Model**. Since our state vector is ordered as $[x, y, v_x, v_y]$, the transition matrix ($\mathbf{F}$) connects position to velocity using the time step $\Delta t$:
 
 $$
-\mathbf{x}_{k} = \mathbf{F} \cdot \mathbf{x}_{k-1} \quad \Rightarrow \quad 
-\begin{bmatrix} x' \\ y' \\ v_x' \\ v_y' \end{bmatrix} = 
+\mathbf{x}_{k} = \mathbf{F} \cdot \mathbf{x}_{k-1} 
+$$
+
+$$
+\begin{bmatrix} x_{k} \\ y_{k} \\ v_{x,k} \\ v_{y,k} \end{bmatrix} = 
 \begin{bmatrix} 
 1 & 0 & \Delta t & 0 \\ 
 0 & 1 & 0 & \Delta t \\ 
-0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 
+0 & 0 & 1 & 0 \\ 
+0 & 0 & 0 & 1 
 \end{bmatrix} 
-\begin{bmatrix} x \\ y \\ v_x \\ v_y \end{bmatrix}
+\begin{bmatrix} x_{k-1} \\ y_{k-1} \\ v_{x,k-1} \\ v_{y,k-1} \end{bmatrix}
 $$
+
+*Note: In the implementation, $\Delta t$ is set to 1 frame.*
 
 ## Kalman Filter Phase
 
-![Tracking Demo](assets/demo_3.gif)
+![Kalman Demo](assets/demo_3.gif)
 
 *(Fig 3. Kalman Filter State Estimation)*
 
