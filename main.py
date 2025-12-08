@@ -1,13 +1,13 @@
 import cv2
 from src.detector import VehicleDetector
-from src.tracker import  DistanceTracker
+from src.tracker import  Tracker
 
 
 VIDEO_PATH = "data/videos/testvideo.mp4"
 
 def main():
     detector = VehicleDetector()
-    tracker = DistanceTracker()
+    tracker = Tracker()
 
     cap = cv2.VideoCapture(VIDEO_PATH)
     
@@ -57,7 +57,7 @@ def main():
             
         
         frame = cv2.resize(frame, (1280, 720))
-        cv2.imshow('Demo - Phase 2', frame)
+        cv2.imshow('Kalman - Phase 3', frame)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break

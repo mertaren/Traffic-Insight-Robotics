@@ -1,7 +1,76 @@
-# venv env
-venv
-./venv
-.venv
+# --- Python Essentials ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# YOLO model
-.pt
+# --- Virtual Environments ---
+venv/
+env/
+.env/
+.venv/
+env.bak/
+venv.bak/
+
+# --- IDE & Editor Configuration ---
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# --- AI & ML Model Weights ---
+*.pt
+*.pth
+*.onnx
+*.tflite
+*.pb
+yolov8*.pt
+best.pt
+last.pt
+yolov8m-visdrone.pt
+
+# --- Ultralytics / YOLO Outputs ---
+runs/
+wandb/
+
+# --- Media & Data Files ---
+*.mp4
+*.avi
+*.mov
+*.mkv
+output_demo.mp4
+
+# General Images
+*.jpg
+*.jpeg
+*.png
+
+!assets/*.gif
+!assets/*.png
+!assets/*.jpg
+
+# --- Datasets ---
+VisDrone/
+datasets/
+data/
+
+# --- Logs & System ---
+*.log
