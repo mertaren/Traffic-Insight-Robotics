@@ -20,8 +20,8 @@ class KalmanFilter:
                                               [0, 1, 0, 0]], np.float32)
 
         # noise params
-        self.kf.processNoiseCov = np.eye(4, dtype=np.float32) * 0.2
-        self.kf.measurementNoiseCov = np.eye(2, dtype=np.float32) * 0.05
+        self.kf.processNoiseCov = np.eye(4, dtype=np.float32) * 0.001
+        self.kf.measurementNoiseCov = np.eye(2, dtype=np.float32) * 0.1
 
     def predict(self):
             
@@ -41,7 +41,7 @@ class Tracker:
           self.tracks = {}
           self.track_id_count = 0
           self.dist_th = 150 # threshold
-          self.max_frame_missing = 5
+          self.max_frame_missing = 10
 
       def update(self, detections):
             """

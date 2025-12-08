@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 class VehicleDetector:
-    def __init__(self, model_path="yolov8m"):
+    def __init__(self, model_path="yolov8n-visdrone.pt"):
         print("model loading..")
         self.model = YOLO(model_path)
 
@@ -17,7 +17,8 @@ class VehicleDetector:
         Output: Bounding box list
         """
         results = self.model(frame, verbose=False,
-                             imgsz=640, conf=0.45,
+                             imgsz=640, conf=0.50,
+                             iou=0.45,
                              classes = self.target_classes)[0]
         detections = []
 
